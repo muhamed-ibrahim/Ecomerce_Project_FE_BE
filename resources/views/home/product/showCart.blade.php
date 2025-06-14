@@ -74,19 +74,33 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($CartOfUser as $data)
+
+                            @if ($CartOfUser->isEmpty())
                                 <tr>
-                                    <td class="" style="padding: 30px 0%">{{ $data->product_title }}</td>
-                                    <td class=""style="padding: 30px 0%">{{ $data->quantity }}</td>
-                                    <td class=""style="padding: 30px 0%">{{ $data->price }}</td>
-                                    <td><img style="width: 75px;
-                                        height: 75px;border-radius: 50%"
-                                            src="{{ Storage::url($data->image) }}" alt=""></td>
-                                    <td style="padding: 25px 1%"><a href="{{ route('product.removeCart', $data->id) }}"
-                                            class="btn btn-danger" value="">Remove</a></td>
+                                    <td colspan="5" class="text-center" style="padding: 30px;">
+                                        <strong>Your cart is empty.</strong>
+                                    </td>
                                 </tr>
-                                <?php $sum += $data->price; ?>
-                            @endforeach
+                            @else
+                                @foreach ($CartOfUser as $data)
+                                    <tr>
+                                        <td style="padding: 30px 0%">{{ $data->product_title }}</td>
+                                        <td style="padding: 30px 0%">{{ $data->quantity }}</td>
+                                        <td style="padding: 30px 0%">{{ $data->price }}</td>
+                                        <td>
+                                            <img style="width: 75px; height: 75px; border-radius: 50%"
+                                                src="{{ Storage::url($data->image) }}" alt="">
+                                        </td>
+                                        <td style="padding: 25px 1%">
+                                            <a href="{{ route('product.removeCart', $data->id) }}"
+                                                class="btn btn-danger">Remove</a>
+                                        </td>
+                                    </tr>
+                                    @php
+                                        $sum += $data->price;
+                                    @endphp
+                                @endforeach
+                            @endif
                         </tbody>
                     </table>
 

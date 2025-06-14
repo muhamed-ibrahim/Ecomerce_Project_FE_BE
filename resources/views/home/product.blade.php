@@ -6,71 +6,67 @@
             </h2>
         </div>
         <div class="row">
-            @foreach ($product as $data)
-                <div class="col-sm-6 col-md-4 col-lg-4">
-                    <div class="box">
-                        <div class="option_container">
-                            <div class="options">
-                                <a href="{{ route('product.details', $data->id) }}" class="option1 "
-                                    style="width: 180px;">
-                                    Product Details
-                                </a>
-                                <form action="{{ route('product.addCart', $data->id) }}" method="POST">
-                                    @csrf
-                                    <div class="input-group mb-3 rounded" style="width: 180px;"
-                                        style="border-radius: 2rem">
-                                        <div class="input-group-prepend">
-                                            <button class="btn option2" type="submit">Add To Cart</button>
-                                        </div>
-                                        <input type="number" class="form-control" min="1" value="1"
-                                            name="quantity" placeholder="" aria-label=""
-                                            aria-describedby="basic-addon1">
-                                    </div>
 
-                                </form>
+            @if ($product->isEmpty())
+                <div class="col-12 text-center">
+                    <h4>No products found.</h4>
+                </div>
+            @else
+                @foreach ($product as $data)
+                    <div class="col-sm-6 col-md-4 col-lg-4">
+                        <div class="box">
+                            <div class="option_container">
+                                <div class="options">
+                                    <a href="{{ route('product.details', $data->id) }}" class="option1"
+                                        style="width: 180px;">
+                                        Product Details
+                                    </a>
+                                    <form action="{{ route('product.addCart', $data->id) }}" method="POST">
+                                        @csrf
+                                        <div class="input-group mb-3 rounded" style="width: 180px;">
+                                            <div class="input-group-prepend">
+                                                <button class="btn option2" type="submit">Add To Cart</button>
+                                            </div>
+                                            <input type="number" class="form-control" min="1" value="1"
+                                                name="quantity" placeholder="" aria-label=""
+                                                aria-describedby="basic-addon1">
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-                        </div>
-                        <div class="img-box">
-                            <img class="" src="{{ Storage::url($data->image) }}" alt="">
-                        </div>
-                        <div class="detail-box">
-                            <h5 class="d-flex justify-content-end align-items-end">
-                                {{ $data->title }}
-                            </h5>
-                            <div class="d-flex flex-column">
-                                @if (!empty($data->discount_price))
-                                    <h6>
-                                        <div class="text-danger">
-                                            {{ $data->discount_price }}%
-
-                                        </div>
-                                        <div class="" style="text-decoration: line-through;">
+                            <div class="img-box">
+                                <img class="" src="{{ Storage::url($data->image) }}" alt="">
+                            </div>
+                            <div class="detail-box">
+                                <h5 class="d-flex justify-content-end align-items-end">
+                                    {{ $data->title }}
+                                </h5>
+                                <div class="d-flex flex-column">
+                                    @if (!empty($data->discount_price))
+                                        <h6>
+                                            <div class="text-danger">
+                                                {{ $data->discount_price }}%
+                                            </div>
+                                            <div class="" style="text-decoration: line-through;">
+                                                ${{ $data->price }}
+                                            </div>
+                                        </h6>
+                                        <h6 class="text-danger">
+                                            ${{ $data->price - ($data->price / 100) * $data->discount_price }}
+                                        </h6>
+                                    @else
+                                        <h6 class="text-danger" style="padding-top: 55px">
                                             ${{ $data->price }}
-                                        </div>
-
-
-
-
-                                    </h6>
-                                    <h6 class="text-danger">
-                                        ${{ $data->price - ($data->price / 100) * $data->discount_price }}
-
-                                    </h6>
-                                @else
-                                    <h6 class="text-danger" style="padding-top: 55px">
-                                        ${{ $data->price }}
-
-                                    </h6>
-                                @endif
-
-
+                                        </h6>
+                                    @endif
+                                </div>
                             </div>
-
-
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            @endif
+
+
             {{-- <div class="col-sm-6 col-md-4 col-lg-4">
              <div class="box">
                 <div class="option_container">

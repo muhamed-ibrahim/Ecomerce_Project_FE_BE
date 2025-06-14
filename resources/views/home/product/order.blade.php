@@ -73,21 +73,32 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($order as $data)
+                            @if ($order->isEmpty())
                                 <tr>
-                                    <td style="padding: 30px 0%">{{ $data->product_title }}</td>
-                                    <td style="padding: 30px 0%">{{ $data->quantity }}</td>
-                                    <td style="padding: 30px 0%">{{ $data->price }}</td>
-                                    <td ><img style="width: 75px;
-                                        height: 75px;border-radius: 50%"
-                                            src="{{ Storage::url($data->image) }}" alt=""></td>
-                                    <td style="padding: 30px 0%">{{ $data->payment_status }}</td>
-                                    <td style="padding: 30px 0%">{{ $data->delivery_status }}</td>
-                                    <td style="padding: 25px 0%"><a class="btn btn-danger" href="">Remove</a></td>
-
-
+                                    <td colspan="7" class="text-center" style="padding: 30px;">
+                                        <strong>No orders found.</strong>
+                                    </td>
                                 </tr>
-                            @endforeach
+                            @else
+                                @foreach ($order as $data)
+                                    <tr>
+                                        <td style="padding: 30px 0%">{{ $data->product_title }}</td>
+                                        <td style="padding: 30px 0%">{{ $data->quantity }}</td>
+                                        <td style="padding: 30px 0%">{{ $data->price }}</td>
+                                        <td>
+                                            <img style="width: 75px; height: 75px; border-radius: 50%"
+                                                src="{{ Storage::url($data->image) }}" alt="">
+                                        </td>
+                                        <td style="padding: 30px 0%">{{ $data->payment_status }}</td>
+                                        <td style="padding: 30px 0%">{{ $data->delivery_status }}</td>
+                                        <td style="padding: 25px 0%">
+                                            <a class="btn btn-danger" href="">Remove</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
+
+
 
                         </tbody>
                     </table>
