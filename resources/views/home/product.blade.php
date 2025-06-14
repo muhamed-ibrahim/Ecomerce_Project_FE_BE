@@ -21,33 +21,44 @@
                                         style="width: 180px;">
                                         Product Details
                                     </a>
-                                    <form action="{{ route('product.addCart', $data->id) }}" method="POST">
-                                        @csrf
-                                        <div class="input-group mb-3 rounded" style="width: 180px;">
-                                            <div class="input-group-prepend">
-                                                <button class="btn option2" type="submit">Add To Cart</button>
+
+                                    @if ($data->quantity > 0)
+                                        <form action="{{ route('product.addCart', $data->id) }}" method="POST">
+                                            @csrf
+                                            <div class="input-group mb-3 rounded" style="width: 180px;">
+                                                <div class="input-group-prepend">
+                                                    <button class="btn option2" type="submit">Add To Cart</button>
+                                                </div>
+                                                <input type="number" class="form-control" min="1"
+                                                    max="{{ $data->quantity }}" value="1" name="quantity"
+                                                    aria-label="" aria-describedby="basic-addon1">
                                             </div>
-                                            <input type="number" class="form-control" min="1" value="1"
-                                                name="quantity" placeholder="" aria-label=""
-                                                aria-describedby="basic-addon1">
+                                        </form>
+                                    @else
+                                        <div class="text-danger text-center font-weight-bold"
+                                            style="width: 180px; margin-top: 10px;">
+                                            Out of Stock
                                         </div>
-                                    </form>
+                                    @endif
                                 </div>
                             </div>
+
                             <div class="img-box">
-                                <img class="" src="{{ Storage::url($data->image) }}" alt="">
+                                <img src="{{ Storage::url($data->image) }}" alt="">
                             </div>
+
                             <div class="detail-box">
                                 <h5 class="d-flex justify-content-end align-items-end">
                                     {{ $data->title }}
                                 </h5>
+
                                 <div class="d-flex flex-column">
                                     @if (!empty($data->discount_price))
                                         <h6>
                                             <div class="text-danger">
                                                 {{ $data->discount_price }}%
                                             </div>
-                                            <div class="" style="text-decoration: line-through;">
+                                            <div style="text-decoration: line-through;">
                                                 ${{ $data->price }}
                                             </div>
                                         </h6>
@@ -64,6 +75,8 @@
                         </div>
                     </div>
                 @endforeach
+
+
             @endif
 
 
