@@ -113,6 +113,14 @@ class HomeController extends Controller
         $user = Auth::user()->id;
         $CartOfUser = Cart::where('user_id', '=', $user)->get();
         foreach ($CartOfUser as $data) {
+            $product = Product::find($data->product_id);
+            if ($product->quantity < $data->quantity) {
+                return redirect()->back()->with('warning', 'product' . $data->product_title . ' is not available in stock');
+            }
+            $product->quantity -= $data->quantity;
+            $product->save();
+
+            // create order
             $order = new Order();
             $order->name = $data->name;
             $order->email = $data->email;
@@ -147,17 +155,18 @@ class HomeController extends Controller
 
     public function payWithCard(Request $request, $totalPrice)
     {
-        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
-        Stripe\Charge::create([
-            "amount" => $totalPrice * 100,
-            "currency" => "usd",
-            "source" => $request->stripeToken,
-            "description" => "Thanks For Payment"
-        ]);
         $user = Auth::user()->id;
         $CartOfUser = Cart::where('user_id', '=', $user)->get();
         foreach ($CartOfUser as $data) {
+            $product = Product::find($data->product_id);
+            if ($product->quantity < $data->quantity) {
+                return redirect()->back()->with('warning', 'product' . $data->product_title . ' is not available in stock');
+            }
+            $product->quantity -= $data->quantity;
+            $product->save();
+
+            // create order
             $order = new Order();
             $order->name = $data->name;
             $order->email = $data->email;
@@ -174,6 +183,14 @@ class HomeController extends Controller
             $order->save();
             $data->delete();
         }
+        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+
+        Stripe\Charge::create([
+            "amount" => $totalPrice * 100,
+            "currency" => "usd",
+            "source" => $request->stripeToken,
+            "description" => "Thanks For Payment"
+        ]);
 
         return redirect()->back()->with('message', 'Payment Successfully');
     }
