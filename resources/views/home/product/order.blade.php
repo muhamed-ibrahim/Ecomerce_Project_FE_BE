@@ -69,7 +69,6 @@
                                 <th scope="col">Image</th>
                                 <th scope="col">Payment Status</th>
                                 <th scope="col">Delivery Status</th>
-                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -91,9 +90,6 @@
                                         </td>
                                         <td style="padding: 30px 0%">{{ $data->payment_status }}</td>
                                         <td style="padding: 30px 0%">{{ $data->delivery_status }}</td>
-                                        <td style="padding: 25px 0%">
-                                            <a class="btn btn-danger" href="">Remove</a>
-                                        </td>
                                     </tr>
                                 @endforeach
                             @endif
