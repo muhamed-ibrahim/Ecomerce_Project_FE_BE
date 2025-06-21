@@ -114,6 +114,12 @@ class HomeController extends Controller
         return view('home.product.all-product', compact('product'));
     }
 
+    public function contact()
+    {
+        return view('home.contact');
+    }
+
+
     public function cash_order()
     {
         $user = Auth::user()->id;

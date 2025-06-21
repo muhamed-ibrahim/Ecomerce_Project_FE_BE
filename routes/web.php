@@ -61,6 +61,8 @@ Route::get('/show_cart', [HomeController::class, 'show_cart'])->name('product.sh
 Route::get('/remove_cart/{id}', [HomeController::class, 'remove_cart'])->name('product.removeCart');
 Route::get('/orders', [HomeController::class, 'order'])->name('order.home')->middleware('auth');
 Route::get('/products', [HomeController::class, 'product'])->name('product.home');
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+
 
 
 
