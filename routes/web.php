@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use Illuminate\Support\Facades\URL;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +37,17 @@ Route::get('/', [HomeController::class, 'index'])->name('homepage');
 Route::get('/redirect', [HomeController::class, 'redirect'])->name('redirect')->middleware(['auth', 'verified']);
 
 
+
+
+Route::get('/test-signed-url', function () {
+    $url = URL::temporarySignedRoute(
+        'verification.verify',
+        now()->addMinutes(60),
+        ['id' => 1, 'hash' => sha1('email@example.com')]
+    );
+
+    dd($url);
+});
 
 Route::middleware(['auth', 'checkType:1'])
     ->prefix('dashboard')
