@@ -59,7 +59,7 @@ Route::get('/product_details/{id}', [HomeController::class, 'product_details'])-
 Route::post('/add_cart/{id}', [HomeController::class, 'add_cart'])->name('product.addCart');
 Route::get('/show_cart', [HomeController::class, 'show_cart'])->name('product.showCart');
 Route::get('/remove_cart/{id}', [HomeController::class, 'remove_cart'])->name('product.removeCart');
-Route::get('/orders', [HomeController::class, 'order'])->name('order.home');
+Route::get('/orders', [HomeController::class, 'order'])->name('order.home')->middleware('auth');
 
 
 Route::get('/cash_order', [HomeController::class, 'cash_order'])->name('product.cashOrder');
