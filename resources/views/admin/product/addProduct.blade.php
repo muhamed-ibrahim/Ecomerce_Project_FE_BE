@@ -43,7 +43,7 @@
 
                                     </div>
                                 @endif
-                                <form action="{{ route('add.product') }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('dashboard.add.product') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-row">
 

@@ -44,7 +44,7 @@
 
                                     </div>
                                 @endif
-                                <form action="{{ route('update.category',$category->id) }}" method="POST">
+                                <form action="{{ route('dashboard.update.category',$category->id) }}" method="POST">
                                     @csrf
                                     <div class="form-group">
                                         <label for="category_name">Name</label>

@@ -57,13 +57,13 @@
                                                 <td>{{ $data->id }}</td>
                                                 <td>{{ $data->category_name }}</td>
                                                 <td><a class="btn btn-primary mx-3"
-                                                        href="{{ route('edit.category', $data->id) }}">Edit</a>
+                                                        href="{{ route('dashboard.edit.category', $data->id) }}">Edit</a>
                                                     {{-- <form
                                                         method="DELETE">
                                                         @csrf --}}
                                                     <a class="btn btn-danger"
                                                         onclick="return confirm('Are you sure you want to delete this item?')"
-                                                        href="{{ route('delete.category', $data->id) }}">Delete</a>
+                                                        href="{{ route('dashboard.delete.category', $data->id) }}">Delete</a>
 
                                                     {{-- </form> --}}
                                                 </td>

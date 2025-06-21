@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Category;
@@ -10,6 +11,16 @@ use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
+    public function dashboard()
+    {
+        return view('admin.home', [
+            'categoryCount' => Category::count(),
+            'productCount' => Product::count(),
+            'orderCount' => Order::count(),
+            'userCount' => User::where('usertype', '0')->count()
+        ]);
+    }
+
     public function view_category()
     {
 

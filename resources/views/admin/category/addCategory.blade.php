@@ -77,7 +77,7 @@
 
                                     </div>
                                 @endif
-                                <form action="{{ route('add.category') }}" method="POST">
+                                <form action="{{ route('dashboard.add.category') }}" method="POST">
                                     @csrf
                                     <div class="form-group">
                                         <label for="category_name">Name</label>

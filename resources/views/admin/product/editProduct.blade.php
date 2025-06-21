@@ -44,7 +44,7 @@
 
                                     </div>
                                 @endif
-                                <form action="{{ route('update.product', $product->id) }}" method="POST"
+                                <form action="{{ route('dashboard.update.product', $product->id) }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-row">

@@ -30,7 +30,7 @@
                         <span class="gradient-text">All Orders
                         </span>
                     </h1>
-                    <form action="{{ route('search.order') }}" method="get">
+                    <form action="{{ route('dashboard.search.order') }}" method="get">
                         @csrf
                         <div class="text-center mx-auto w-50">
                             <div class="input-group">
@@ -101,7 +101,7 @@
                                                 <td>{{ $data->delivery_status }}</td>
                                                 @if ($data->delivery_status != 'delivered')
                                                     <td><a class="btn btn-primary mx-2"
-                                                            href="{{ route('delivered.product', $data->id) }}">Delivered</a>
+                                                            href="{{ route('dashboard.delivered.product', $data->id) }}">Delivered</a>
                                                     </td>
                                                 @else
                                                     <td class="text-success d-flex" style="padding-top: 43px">

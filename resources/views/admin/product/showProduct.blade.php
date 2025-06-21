@@ -72,9 +72,9 @@
                                                 <td>{{ $data->category }}</td>
                                                 <td>{{ $data->discount_price }}</td>
                                                 <td><a class="btn btn-primary mx-2"
-                                                        href="{{ route('edit.product', $data->id) }}">Edit</a>
+                                                        href="{{ route('dashboard.edit.product', $data->id) }}">Edit</a>
                                                     <a class="btn btn-danger"
-                                                        href="{{ route('delete.product', $data->id) }}">Delete</a>
+                                                        href="{{ route('dashboard.delete.product', $data->id) }}">Delete</a>
                                                 </td>
                                             </tr>
                                         @endforeach
