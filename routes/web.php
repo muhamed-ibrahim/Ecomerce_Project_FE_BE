@@ -32,7 +32,7 @@ Route::get('/', [HomeController::class, 'index'])->name('homepage');
 //     })->name('dashboard');
 // });
 
-Route::get('/redirect', [HomeController::class, 'redirect'])->name('redirect')->middleware('auth', 'verified');
+Route::get('/redirect', [HomeController::class, 'redirect'])->name('redirect')->middleware(['auth', 'verified']);
 
 
 

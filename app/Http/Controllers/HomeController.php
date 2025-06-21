@@ -10,6 +10,7 @@ use App\Models\User;
 use Stripe\Customer;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,22 +27,10 @@ class HomeController extends Controller
     {
         $userType = Auth::user()->usertype;
         if ($userType == '1') {
-            $products = Product::all()->count();
-            $orders = Order::all()->count();
-            $users = User::all()->count();
-            $revenue = 0;
-            $order = Order::all();
-            foreach ($order as $data) {
-                $revenue = $revenue + $data->price;
-            }
-            $orderDelivered = Order::where('delivery_status', '=', 'delivered')->get()->count();
-            $orderProcessing = Order::where('delivery_status', '=', 'processing')->get()->count();
 
-
-            return view('admin.home', compact('products', 'orders', 'users', 'revenue', 'orderDelivered', 'orderProcessing'));
+            return redirect()->route('dashboard.home');
         } else {
-            $product = Product::all();
-            return view('home.userpage', compact('product'));
+            return redirect()->route('homepage');
         }
     }
 
