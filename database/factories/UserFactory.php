@@ -32,7 +32,7 @@ class UserFactory extends Factory
             'current_team_id' => null,
             'phone' => '01175120011',
             'address' => 'Cairo, Egypt',
-            'usertype' => 1
+            'usertype' => 1,
         ];
     }
 
