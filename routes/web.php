@@ -37,19 +37,6 @@ Route::get('/', [HomeController::class, 'index'])->name('homepage');
 
 Route::get('/redirect', [HomeController::class, 'redirect'])->name('redirect')->middleware(['auth', 'verified']);
 
-
-
-
-Route::get('/test-signed-url', function () {
-    $url = URL::temporarySignedRoute(
-        'verification.verify',
-        now()->addMinutes(60),
-        ['id' => Auth::user()->id, 'hash' => sha1(Auth::user()->getEmailForVerification())]
-    );
-
-    dd($url);
-});
-
 Route::middleware(['auth', 'checkType:1'])
     ->prefix('dashboard')
     ->name('dashboard.')
