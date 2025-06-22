@@ -65,7 +65,7 @@
                                                 <td>{{ $data->description }}</td>
                                                 <td><img style="width: 75px;
                                                     height: 75px;"
-                                                        src="{{ Storage::url($data->image) }}">
+                                                        src="{{ asset('storage/' . $data->image) }}">
                                                 </td>
                                                 <td>{{ $data->quantity }}</td>
                                                 <td>{{ $data->price }}</td>
