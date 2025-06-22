@@ -44,7 +44,7 @@
                             </div>
 
                             <div class="img-box">
-                                <img src="{{ Storage::url($data->image) }}" alt="">
+                                <img src="{{ asset('storage/' . $data->image) }}" alt="">
                             </div>
 
                             <div class="detail-box">
