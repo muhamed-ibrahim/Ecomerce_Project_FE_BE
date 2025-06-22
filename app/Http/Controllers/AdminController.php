@@ -81,8 +81,11 @@ class AdminController extends Controller
         $product->price = $request->price;
         $product->category = $request->category;
         $product->discount_price = $request->discount_price;
-        $image = $request->file('image')->store('productImg', 'public');
-        $product->image = $image;
+        if ($request->hasFile('image')) {
+            $imageName = time() .'.'. $request->file('image')->getClientOriginalExtension();
+            $request->file('image')->storeAs('public/product', $imageName);
+            $product->image = 'product/' . $imageName;
+        }
         $product->save();
         return redirect()->back()->with('message', 'Product added successfully');
     }
