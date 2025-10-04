@@ -58,10 +58,9 @@ return [
             'prefix_indexes' => true,
             'strict' => true,
             'engine' => null,
-            'ssl_mode' => env('DB_SSL_MODE', 'required'),
+            'ssl_mode' => env('DB_SSL_MODE', null),
             'options' => extension_loaded('pdo_mysql') ? array_filter([
-                // use env('AIVEN_CA_PATH') if you want the path from an env var;
-                PDO::MYSQL_ATTR_SSL_CA => base_path(env('AIVEN_CA_PATH', 'aiven-ca.pem')),
+                PDO::MYSQL_ATTR_SSL_CA => env('DB_SSL_MODE') ? base_path(env('AIVEN_CA_PATH')) : null,
             ]) : [],
         ],
 
