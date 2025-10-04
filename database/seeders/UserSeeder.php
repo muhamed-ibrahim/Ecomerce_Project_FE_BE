@@ -14,15 +14,16 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::insert([
-            'name'=> 'Mohamed Ibrahim',
-            'email'=> 'mohamedibrahimx37@gmail.com',
-            'password'=> Hash::make('12345678'),
-            'usertype'=>1,
-            'phone'=> '01123624789',
-            "address" => "Cairo, Egypt",
-            'created_at'=> now(),
-            'updated_at'=> now(),
-        ]);
+        User::updateOrCreate(
+            ['email' => 'mohamed.ibrahim@gmail.com'],
+            [
+                'name' => 'Mohamed Ibrahim',
+                'email_verified_at' => now(),
+                'password' => Hash::make('12345678'),
+                'phone' => '01175120011',
+                'address' => 'Cairo, Egypt',
+                'usertype' => 1,
+            ]
+        );
     }
 }
